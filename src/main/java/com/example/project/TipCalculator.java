@@ -1,32 +1,59 @@
 package com.example.project;
 
-public class TipCalculator {
-    //WRITE YOUR PROGRAM IN calculateTip
-    public static String calculateTip(int people, int percent, double cost) { //You must use these  variable in your calculations
-        //DO NOT DELETE ANY OF THE CODE BELOW      
-        StringBuilder result = new StringBuilder();
-        //your code here
-                       
-        result.append("-------------------------------\n");
-        result.append("Total bill before tip: "); //concatenate to this string. DO NOT ERASE AND REWRITE
-        result.append("Total percentage: ");
-        result.append("Total tip: ");
-        result.append("Total Bill with tip: ");
-        result.append("Per person cost before tip: ");
-        result.append("Tip per person: ");
-        result.append("Total cost per person: ");
-        result.append("-------------------------------\n");
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.text.DecimalFormat;
 
+
+public class TipCalculator {
+
+
+  public static String calculateTip(int people, int percent, double cost) {
+        // DecimalFormat to round to two decimal places
+        DecimalFormat df = new DecimalFormat("#.##");
+        // Calculate tip and total amounts
+        double tipAmount = cost * percent / 100;
+        double totalBillWithTip = cost + tipAmount;
+        double costPerPersonBeforeTip = cost / people;
+        double tipPerPerson = tipAmount / people;
+        double totalCostPerPerson = totalBillWithTip / people;
+
+        // Create result StringBuilder to hold formatted output
+        StringBuilder result = new StringBuilder();
+        // Format and append the results to display
+        result.append("-------------------------------\n");
+        result.append("Total bill before tip: $" + df.format(cost) + "\n");
+        result.append("Total percentage: " + percent + "%\n");
+        result.append("Total tip: $" + df.format(tipAmount) + "\n");
+        result.append("Total Bill with tip: $" + df.format(totalBillWithTip) + "\n");
+        result.append("Per person cost before tip: $" + df.format(costPerPersonBeforeTip) + "\n");
+        result.append("Tip per person: $" + df.format(tipPerPerson) + "\n");
+        result.append("Total cost per person: $" + df.format(totalCostPerPerson) + "\n");
+        result.append("-------------------------------\n");
 
         return result.toString();
     }
-     //TEST YOUR PROGRAM IN main
-     public static void main(String[] args) {
-        //try different values for people, percent, and cost to test your program before running test cases
-        int people; 
-        int percent;
-        double cost;              
-        System.out.println(calculateTip(people,percent,cost));
+
+                                   
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Collect number of people, tip percentage, and total cost
+        System.out.print("Enter the number of people: ");
+        int people = scanner.nextInt();
+
+        System.out.print("Enter the tip percentage: ");
+        int percent = scanner.nextInt();
+
+        System.out.print("Enter the total cost before tip: ");
+        double cost = scanner.nextDouble();
+
+
+        // Display the results by calling calculateTip method
+        System.out.println(calculateTip(people, percent, cost));
+
+        scanner.close();
+
     }
 }
-        
